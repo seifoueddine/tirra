@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> Editing Provider : <%= @provider.raison %></h1>
+        <hr>
+        <%= link_to 'Show', @provider,class:"btn btn-md btn-success" %> |
+        <%= link_to 'Back', providers_path ,class:"btn btn-md btn-warning"%>
+        <hr>
+
+
+<%= render 'form', provider: @provider %>
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> Provider : <%= @provider.raison %></h1>
+        <hr>
+        <%= link_to 'Edit', edit_provider_path(@provider),class:"btn btn-md btn-primary" %> |
+        <%= link_to 'Back', providers_path,class:"btn btn-md btn-warning" %>
+        <hr>
+
+
+        <p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Raison:</strong>
+  <%= @provider.raison %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @provider.phone %>
+</p>
+
+
+      </div>
+    </div>
+  </div>
+</div>

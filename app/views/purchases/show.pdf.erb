@@ -1,0 +1,20 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Produit</th>
+    <th>Quantité</th>
+    <th>price</th>
+    <th>partial price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @acha_pros.each { |s| %>
+      <tr>
+        <td><%= s.product.designation %></td>
+        <td><%= s.quantity %></td>
+        <td><%= s.price %> DZD</td>
+        <td><%= s.price * s.quantity%> DZD</td>
+
+  <% } %>
+  </tbody>
+</table>

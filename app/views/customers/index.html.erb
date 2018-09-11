@@ -1,0 +1,77 @@
+<div class="container-fluid">
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+
+
+      <h1>Customers</h1>
+      <hr>
+
+      <% if notice%>
+          <div class="alert alert-info">
+            <p id="notice"><%= notice %></p>
+          </div>
+      <%end%>
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading"> <%= link_to 'New Customer', new_customer_path ,class:"btn btn-success"%></div>
+          <div class="panel-body">
+
+
+            <div class="row">
+              <div class="col-md-4 col-md-offset-6">
+                <%= will_paginate @customer, renderer: BootstrapPagination::Rails  %>
+              </div>
+            </div>
+
+
+
+
+
+  <div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel-body">
+          <hr>
+          <table class="table">
+
+  <thead>
+    <tr>
+      <th>Raison</th>
+      <th>Phone</th>
+      <th>Action</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.raison %></td>
+        <td><%= customer.phone %></td>
+        <td><%= link_to 'Show', customer,class:"btn btn-md btn-success" %>
+        <%= link_to 'Edit', edit_customer_path(customer),class:"btn btn-md btn-primary" %>
+          <%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+        </div>
+    </div>
+  </div>
+          <div class="row">
+            <div class="col-md-4 col-md-offset-8">
+              <%= will_paginate @customer, renderer: BootstrapPagination::Rails  %>
+            </div>
+          </div>
+
+
+  </div>
+</div>
+    </div>
+  </div>
+</div>

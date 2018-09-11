@@ -1,0 +1,76 @@
+
+
+
+<table class="table sortable">
+  <thead>
+  <tr>
+    <th style="padding: 8px 0px 8px 0px"> </th>
+    <th style="padding: 8px 0px 8px 0px">Contact <span class="glyphicon glyphicon-sort-by-alphabet"></span></th>
+    <th>Date <span class="glyphicon glyphicon-sort"></span></th>
+    <th>Total price <span class="glyphicon glyphicon-sort-by-order"></span></th>
+  <th>Action</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @paginate.each do |sale| %>
+      <tr>
+        <% if sale.bonus != 0 && sale.bonus != nil %>
+            <td style="padding: 8px 3px 8px 0px" >
+       <span class="glyphicon glyphicon-gift pull-right" style="color:red"></span>
+        <%else%>
+            <td><% sale.bonus %>
+            <%end%></td>
+          <td style="padding: 8px 0px 8px 0px"><%if sale.contact%><%= sale.contact.raison %><%end%></td>
+        <td><%= sale.date %></td>
+        <td><%= sale.total_price  %> DZD</td>
+
+        <% if sale.date.strftime("%d/%m/%Y") == Date.today.strftime("%d/%m/%Y") %>
+        <td><%= link_to 'Show', sale ,class:"btn btn-md btn-success"%>
+          <%= link_to 'Edit', edit_sale_path(sale),class:"btn btn-md btn-primary" %>
+          <% if can? :destroy, @sale %>
+              <%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
+              </tr>
+          <% end %>
+
+      <%else%>
+            <td><%= link_to 'Show', sale ,class:"btn btn-md btn-success",disabled:true%>
+              <%= link_to 'Edit', edit_sale_path(sale),class:"btn btn-md btn-primary" ,disabled: true%>
+              <% if can? :destroy, @sale %>
+                  <%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger",disabled: true%></td>
+                  </tr>
+              <% end %>
+
+      <%end%>
+
+  <% end %>
+
+  </tbody>
+
+</table>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-sm-6">
+    <div  id="dataTables-example_info" role="status" aria-live="polite">
+      <span>Affichage  <%=@paginate.length%> de <%= @total%> entrées</span>
+    </div>
+  </div>
+
+  <div class="col-sm-6" >
+    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="position: absolute; right:13px; top: -20px">
+      <%= will_paginate @paginate,renderer: BootstrapPagination::Rails , inner_window: 1 , previous_label: "Précédent", next_label: "Suivant"%>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('a[disabled=disabled]').click(function(event){
+            event.preventDefault(); // Prevent link from following its href
+        });
+    });
+
+
+</script>

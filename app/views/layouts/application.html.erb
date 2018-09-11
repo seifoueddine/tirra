@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ERP App</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path%>">My ERP</a>
+      </div>
+
+
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <%if current_user %>
+          <ul class="nav navbar-nav">
+          <li ><%= link_to 'Product', products_path %></li>
+          <li ><%= link_to 'Sale', sales_path %></li>
+          <li ><%= link_to 'Purchase', purchases_path %></li>
+         <!-- <li ><%= link_to 'Customer', customers_path %></li>
+          <li ><%= link_to 'Provider', providers_path %></li>-->
+          <li ><%= link_to 'Family', families_path %></li>
+          <li ><%= link_to 'Stock', stocks_index_path %></li>
+          <li ><%= link_to '/stock-alerts' do%>
+                Stock Alerts <%= @alerts%> <span class="glyphicon glyphicon-exclamation-sign " style="color:red"></span>
+                <%end%>
+                </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contacts <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Contacts', contacts_path %></li>
+              <li><%= link_to 'Roles', roles_path %></li>
+            </ul>
+          </li>
+              <% if can? :update, @user %>
+          <li ><%= link_to 'User', users_path %></li>
+              <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <li ><%= link_to 'Sign out', destroy_user_session_path, method: :delete%></li>
+          </ul>
+            </ul>
+          <% else%>
+            <ul class="nav navbar-nav navbar-right">
+              <button type="button" class="btn btn-danger btn-mn" data-toggle="modal" data-target="#myModal">Se connecter</button>
+            </ul>
+          <%end%>
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="container">
+    <% if notice %>
+    <div class="col-md-12 alert alert-info">
+    <p id="notice"><%= notice %></p>
+
+  </div>
+        <br>
+    <%end%>
+    <% if alert %>
+        <div class="col-md-12 alert alert-danger">
+          <p id="alert"><%= alert %></p>
+        </div>
+        <br>
+    <%end%>
+    <%= yield %>
+  </div>
+  <br>
+  <br>
+  <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <% if user_signed_in? %>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              Connecté en tant que <%= current_user.role %> utilisateur <%= current_user.name %>
+            </div>
+          </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-12 text-center ">
+          <p> ERP App par <b style="color:red" >Seif Eddine NOUARA</b></p>
+        </div>   </div>
+    </div>
+  </div>
+  </body>
+</html>
+<script>
+    <% if notice %>
+    alert(<%= notice %>);
+    <% end %>
+
+</script>

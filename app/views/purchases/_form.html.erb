@@ -1,0 +1,63 @@
+<%= form_with(model: purchase, local: true, html: { multipart: true }) do |form| %>
+  <% if purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+
+      <ul>
+      <% purchase.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<br>
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.text_field :date, :value => action_name == 'new' ? Time.now.strftime("%d/%m/%Y") : @purchase.date , class: 'datepicker form-control', 'data-date-format'=>"dd/mm/yyyy", required: true, id:'date' ,tabindex:"1"%>
+
+  </div>
+
+
+
+    <br>
+    <div class="field">
+      <%= form.label :contact_id %>
+      <%= form.select :contact_id, options_for_select(ContactRole.where(role_id: 2).map{ |s| [s.contact.raison, s.contact_id] if s.contact != nil }.compact),{prompt: "select a contact"} , class: 'form-control' %>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= form.label :document %>
+      <%= form.file_field :document,class:"form-control",tabindex:"5" %>
+    </div>
+
+
+    <hr>
+  <div class="actions">
+    <%= form.submit class:"btn btn-md btn-success pull-right"%>
+  </div>
+    <br>
+<% end %>
+
+<script>
+    $(function() {
+        $( "#date" ).datepicker({
+            dateFormat : 'mm/dd/yy',
+            changeMonth : true,
+            changeYear : true,
+            yearRange: '-100y:c+nn',
+            maxDate: '-1d',
+        });
+    });
+</script>
+
+
+<script>
+    var e3 = document.getElementById('date');
+    if(e3) {
+        e3.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
+            e.target.value = (x[1] ? x[1] : '') + (x[2] ? '/' + x[2] : '') + (x[3] ? '/' + x[3] : '');
+        });}
+</script>

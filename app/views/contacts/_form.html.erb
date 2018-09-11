@@ -1,0 +1,40 @@
+<%= form_with(model: contact, local: true) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :raison %>
+    <%= form.text_field :raison, id: :contact_raison,class:"form-control",tabindex:"1" %>
+  </div>
+<br>
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone, id: :contact_phone ,class:"form-control"%>
+  </div>
+<br>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-md btn-success pull-right" %>
+  </div>
+
+<% end %>
+
+
+<script>
+    var e1 =document.getElementById('contact_phone');
+    if (e1) {
+        e1.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,2})(\d{0,2})(\d{0,2})(\d{0,2})/);
+            e.target.value = (x[1] ?"+" + 213 + "." : '') + (x[2] ? x[2] : '') + (x[3] ? x[3] : '') + (x[4] ? x[4] : '') +
+                (x[5] ?  x[5] : '') + (x[6] ?  x[6] : '');
+        });}
+</script>

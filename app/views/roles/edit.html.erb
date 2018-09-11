@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> Editing Role : <%= @role.label %></h1>
+        <hr>
+
+        <%= link_to 'Show', @role ,class:"btn btn-md btn-success"%> |
+        <%= link_to 'Back', roles_path,class:"btn btn-md btn-warning" %>
+        <hr>
+        <%= render 'form', role: @role %>
+
+      </div>
+    </div>
+  </div>
+</div>

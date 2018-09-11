@@ -1,0 +1,50 @@
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h1><span class="glyphicon glyphicon-stats"> </span> | Stocks</h1>
+      <hr>
+
+
+
+
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12">
+
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-9">
+
+                    <div class="dataTables_length input-group" id="example_length">
+                      <div class="col-sm-2">
+                        <span>Voir</span>
+                      </div>
+
+                      <div class="col-sm-6" style="margin-left: 10px">
+                        <%= select_tag(:count,options_for_select([10,25,50], selected: session[:per_pages]),class:"form-control input-sm", onchange:"SelectSearch(id,'products','')", id:"select" )%>
+                      </div>
+                      <span>entrées</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div id="example_filter" class="dataTables_filter">
+                      <%= search_field_tag "search_champ",session[:data] ,{class:"form-control input-sm",placeholder:"Chercher",onKeyUp:"SelectSearch(id,'products','')" }%>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row" id="table_search" style="padding: 10px">
+                  <%= render(:partial => 'index', locals: {paginate: @paginate})%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

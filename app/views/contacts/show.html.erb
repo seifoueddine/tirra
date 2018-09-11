@@ -1,0 +1,85 @@
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+          <h1> Contact : <%= @contact.raison %></h1>
+          <hr>
+
+          <%= link_to 'Edit', edit_contact_path(@contact),class:"btn btn-md btn-primary" %> |
+          <%= link_to 'Back', contacts_path ,class:"btn btn-md btn-warning"%>  |
+
+          <a class="btn btn-success" data-toggle="modal" href="#betaModal">Add role</a>
+
+
+          <div id="betaModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">×</button>
+                  <h3>Add role</h3>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+
+
+                    <%= form_tag(contacts_add_role_path, {:method => :post}) do %>
+                        <%= hidden_field_tag :id, @contact.id %>
+
+                        <div class="col-md-12">
+                          <%= select_tag :role_id, options_for_select(Role.all_except(@cont_rol.map(&:role_id)).map { |s| [s.label, s.id] }.compact), { prompt: "select a role", class: 'form-control'} %>
+
+                        </div>
+
+                        <div class="col-md-12">
+                          <br>
+                          <%= submit_tag 'Add', class: 'btn btn-success btn-block' %>
+                        </div>
+                    <% end %>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="col-sm-4">
+            <div class="panel panel-success">
+              <div class="panel-heading"><strong>Raison </strong></div>
+              <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @contact.raison %></font></p></div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="panel panel-success">
+              <div class="panel-heading"><span class="glyphicon glyphicon-earphone"></span> | <strong>Phone </strong></div>
+              <div class="panel-body"><p class="text-center" ><font size="4" color="green">   <%= @contact.phone %></font></p></div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="panel panel-success">
+              <div class="panel-heading"><strong>Roles </strong></div>
+              <div class="panel-body"><p class="text-center" ><font size="4" color="green">
+
+
+
+                <% @cont_rol.each { |s| %>
+                    <%= s.role.label %>
+                    <%= link_to '' ,{controller: 'contacts', action: 'del_role', id: s.contact_id, role_id: s.id}, {:class=>"glyphicon glyphicon-remove" } %>
+
+                <% } %>
+
+              </font></p></div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

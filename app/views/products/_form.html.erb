@@ -1,0 +1,59 @@
+<%= form_with(model: product, local: true, html: { multipart: true }) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<br>
+  <div class="field  " >
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :product_code,class:"form-control",required: true ,tabindex:"1" %>
+  </div>
+<br>
+  <div class="field">
+    <%= form.label :designation %>
+    <%= form.text_field :designation, id: :product_designation,class:"form-control",tabindex:"2"  %>
+  </div>
+<br>
+
+    <div class="field">
+      <%= form.label :family_id %>
+      <%= form.select :family_id, options_from_collection_for_select(Family.all,'id','name'),{},class:"form-control",tabindex:"3"%>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= form.label :price %>
+      <%= form.text_field :price,id: :product_price,class:"form-control",tabindex:"4"%>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= form.label :image %>
+      <%= form.file_field :image,class:"form-control",tabindex:"5" %>
+    </div>
+    <hr>
+  <div class="actions">
+    <%= form.submit class:"btn btn-md btn-success pull-right",tabindex:"6"%>
+  </div>
+    <br>
+<% end %>
+
+<script>
+    var e1 =document.getElementById('product_price');
+    if (e1) {
+        e1.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/^[:digit:]*$/);
+            e.target.value =   (x[1] ?  x[1]  : '');
+        });}
+</script>
+
+<!--- ^\d+(([.,])\d+)?$  just string --->
+
+<!--- ^[:digit:]*$  half solution --->

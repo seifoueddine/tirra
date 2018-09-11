@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<meta charset="utf-8"  />
+<html>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+  }
+  th, td {
+    border: 1px solid black;
+    font-size: 13px;
+    height: 50px;
+  }
+  h4 {
+    line-height: 0.3;
+    font-family: "Times New Roman", Times, serif;
+    display: inline-block;
+    height:100%;
+    width:35%;
+
+  }
+  p {
+    line-height: 0.3;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10px;
+    display: inline-table;
+    height:50%;
+    width:50%;
+  }
+</style>
+
+<h3 align="center">BON DE LIVRAISON N <%=@sale.id%></h3>
+<h4 aria-live="left">Votre entreprise</h4>
+<br>
+<P style="float: left">SOLUTION XXXXXXX & XXXXXXXX</P>
+<p style="float: right">RIB:00697 300694 30059</p>
+<p style="float: right">RC N° 00/00 0092212B16</p>
+<p style="float: left">11 Rue XXXXX XXXXXX-Wilaya-Algeria</p>
+<p style="float: right">NIF:001619009221266 </p>
+<p style="float: right">TEL/FAX:+213 00 00 00 00 - MOB:0XXX XX XX XX </p>
+<p style="float: left">E-mail: contact@contact.com </p>
+<p style="float: right">Art.Imp:1901612502 </p>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Codes</th>
+    <th>Designations</th>
+    <th>Quantités<br>commandées</th>
+    <th>Prix Produit</th>
+    <th>Prix Achete</th>
+    <th>Remise</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @ven_pros.each { |s| %>
+      <tr>
+        <td align="center"><%= s.product.code%></td>
+        <td align="center"><%= s.product.designation %></td>
+        <td align="center"><%= s.quantity %></td>
+        <td align="center"><%= s.price %> DZD</td>
+        <td align="center"><%= s.price * s.quantity%> DZD</td>
+            <td align="center"> <%= s.remise%></td>
+
+
+  <% } %>
+  </tbody>
+</table>
+<br>
+<h4 style="float: left"> Le prix Total: <%=@sale.total_price%></h4>
+<h4 style="float: right"> Livré le:  <%=@sale.date%></h4>
+<br>
+<br>
+
+<% if params[:bonus] == "1" %>
+<h5 align="left"> Bonus:  <% @sac.each do |g|%> <%=g%> <%end%></h5>
+<%end%>
+</html>

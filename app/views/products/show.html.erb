@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> Product : <%= @product.designation %></h1>
+        <hr>
+        <%= link_to 'Edit', edit_product_path(@product),class:"btn btn-md btn-primary" %> |
+        <%= link_to 'Back', products_path ,class:"btn btn-md btn-warning"%> |
+        <%= link_to 'New Product', new_product_path ,class:"btn btn-md btn-success"%>
+<br>
+
+
+        <hr>
+
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"> <strong>Code</strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @product.code %></font></p></div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Designation </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">   <%= @product.designation %></font></p></div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Family </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">   <%= @product.family.name %></font></p></div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-euro"></span> | <strong>Price </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">   <%= @product.price %></font></p></div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-picture"></span> | <strong>Image </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">   <%= image_tag @product.image.url(:medium) %></font></p></div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

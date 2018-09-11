@@ -1,0 +1,73 @@
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+
+
+      <h1>Families</h1>
+      <hr>
+
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= link_to 'New Family', new_family_path ,class:"btn btn-success"%></div>
+          <div class="panel-body">
+
+
+            <div class="row">
+              <div class="col-md-4 col-md-offset-8">
+                <%= will_paginate @family, renderer: BootstrapPagination::Rails  %>
+              </div>
+            </div>
+
+
+  <div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel-body">
+          <hr>
+          <table class="table sortable">
+            <thead>
+            <tr>
+              <th>Family <span class="glyphicon glyphicon-sort-by-alphabet"></span></th>
+              <th>Sub Family <span class="glyphicon glyphicon-sort-by-alphabet"></span></th>
+              <th>Action</th>
+
+              <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @families.each do |family| %>
+      <tr>
+        <% if family.parent_id == nil %>
+            <td><%= family.name %></td>
+            <td><%= nil %></td>
+        <%else%>
+            <td><%= nil %></td>
+            <td><%= family.name %></td>
+      <%end%>
+        <td><%= link_to 'Show', family,class:"btn btn-md btn-success" %>
+        <%= link_to 'Edit', edit_family_path(family),class:"btn btn-md btn-primary" %>
+          <% if can? :update, @family %>
+        <%= link_to 'Destroy', family, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
+      </tr>
+              <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+        </div>
+    </div>
+  </div>
+          <div class="row">
+            <div class="col-md-4 col-md-offset-8">
+              <%= will_paginate @family, renderer: BootstrapPagination::Rails  %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

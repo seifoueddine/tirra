@@ -1,0 +1,153 @@
+
+<style>
+  p.thicker {
+    font-weight: 900;
+  }
+
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> Purchase date : <%= @purchase.date %></h1>
+        <hr>
+        <%= link_to 'Edit', edit_purchase_path(@purchase),class:"btn btn-md btn-primary" %> |
+        <%= link_to 'Back', purchases_path ,class:"btn btn-md btn-warning"%> |
+       <%= link_to 'Pdf'  , purchase_path(format: :pdf) ,class:"btn btn-lg btn-success fa fa-file-pdf-o"%> |
+        <%= link_to 'Excel', purchase_path(format: :xlsx) ,class:"btn btn-lg btn-info fa fa-file-excel-o"%>
+
+        <hr>
+        <div class="col-sm-4">
+        <div class="panel panel-success">
+          <div class="panel-heading"><span class="glyphicon glyphicon-calendar"></span> | <strong>Date</strong></div>
+          <div class="panel-body"><p class="text-center"><font size="6" color="green"><%= @purchase.date %></font></p></div>
+        </div>
+      </div>
+
+
+
+      <div class="col-sm-4">
+        <div class="panel panel-success">
+          <div class="panel-heading"><span class="glyphicon glyphicon-euro"></span> | <strong>Total price</strong></div>
+          <div class="panel-body"><p class="text-center" class="thicker"><font size="6" color="green"> <%= @purchase.total_price %> DZD</font></p></div>
+        </div>
+      </div>
+
+
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"> <span class="glyphicon glyphicon-user"> </span> |<strong> Provider</strong></div>
+            <div class="panel-body"><p class="text-center"><font size="6" color="green"> <%if @purchase.contact %><%= @purchase.contact.raison %> <%end%></font></p></div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="panel panel-success">
+            <div class="panel-heading"> <span class="glyphicon glyphicon-file"> </span> | <strong>Document</strong></div>
+            <div class="panel-body">
+              <%if @purchase.document_file_name != nil %>
+                  <iframe src="<%= @purchase.document %>" width="1050" height="400"></iframe>
+              <%else%>
+                  <iframe src="<%= @purchase.document %>" width="1050" height="400"></iframe>
+              <%end%>
+
+            </div>
+          </div>
+        </div>
+
+
+<hr>
+        <a class="btn btn-success" data-toggle="modal" href="#betaModal">Add Product</a>
+        <div id="betaModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button class="close" data-dismiss="modal">×</button>
+                <h3>Add Product</h3>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+          <%= form_tag(purchases_add_produit_url, {:method => :post}) do %>
+              <%= hidden_field_tag :id, @purchase.id %>
+              <div class="col-md-4">
+                <strong>Products:</strong>
+                <%= select_tag :product_id, options_for_select(Product.all_except(@cont_sel.map(&:product_id)).map { |s| [s.designation, s.id] }.compact), { prompt: "select product", class: 'form-control',:required => true} %>
+              </div>
+              <div class="col-md-4">
+                <strong>Quantity:</strong>
+                <%= text_field_tag :quantity,nil,{class:"form-control" ,placeholder:"Quantité",:required => true}%>
+              </div>
+
+              <div class="col-md-4">
+                <strong>Price:</strong>
+                <%= text_field_tag :price,nil,{class:"form-control" ,placeholder:"Prix",:required => true} %>
+              </div>
+              <div class="col-md-4">
+                <br>
+                <%= submit_tag 'Create', class: 'btn btn-success' %>
+              </div>
+          <% end %>
+        </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>price</th>
+            <th>partial price</th>
+            <% if can? :update, @purchase %>
+            <th>Action</th>
+                <% end %>
+          </tr>
+          </thead>
+          <tbody>
+          <% @acha_pros.each { |s| %>
+              <tr>
+                <td><%= s.product.designation %></td>
+                <td><%= s.quantity %></td>
+                <td><%= s.price %> DZD</td>
+                <td><%= s.price * s.quantity%> DZD</td>
+
+                <% if can? :destroy, @purchase %>
+                <td><%= link_to 'Destroy', "/purchases/#{params[:id]}/delete_produit/#{s.id};", data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
+
+              </tr>
+                    <% end %>
+          <% } %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var e1 =document.getElementById('quantity');
+    if (e1) {
+        e1.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,9})(\d{0,2})/);
+            e.target.value =   (x[1] ? x[1] : '') + (x[2] ? + x[2] : '');
+        });}
+</script>
+
+
+<script>
+    var e1 =document.getElementById('price');
+    if (e1) {
+        e1.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/^[:digit:]*$/);
+            e.target.value =   (x[1] ?  x[1]  : '');
+        });}
+</script>

@@ -1,0 +1,29 @@
+<%= form_with(model: family, local: true) do |form| %>
+  <% if family.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(family.errors.count, "error") %> prohibited this family from being saved:</h2>
+
+      <ul>
+      <% family.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+        <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :family_name ,class:"form-control",tabindex:"1"%>
+  </div>
+    <br>
+
+    <div class="field">
+      <%= form.label :parent_id %>
+      <%= form.select :parent_id, options_for_select(Family.all.map{ |s| [s.name, s.id] }.compact),{prompt: "select a family"}, class: 'form-control' %>
+    </div>
+    <br>
+
+<hr>
+  <div class="actions">
+    <%= form.submit class:"btn btn-md btn-success pull-right" %>
+  </div>
+<% end %>

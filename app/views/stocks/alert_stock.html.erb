@@ -1,0 +1,20 @@
+<% @stock.each do |sto| %>
+    <%if sto.amount<= 3 %>
+        <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          Le produit suivant presque fini dans le stock<br><br>
+          <strong>*</strong>  Vous avez <strong>  <%= sto.amount %> </strong>  du produit : <strong>  <%= sto.designation %></strong>
+          <br>
+        </div>
+    <%end%>
+<% end %>
+<% @stock.each do |sto| %>
+    <%if sto.amount<= 6 && sto.amount > 3%>
+        <div class="alert alert-warning alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          Le produit suivant est atteint sont niveau minimal<br><br>
+          <strong>*</strong>  Vous avez <strong>  <%= sto.amount %> </strong>  du produit : <strong>  <%= sto.designation %></strong>
+          <br>
+        </div>
+    <%end%>
+<% end %>

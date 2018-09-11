@@ -1,0 +1,287 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> Sale code: <%= @sale.id %></h1>
+        <hr>
+        <%= link_to 'Edit', edit_sale_path(@sale),class:"btn btn-md btn-primary" %> |
+        <%= link_to 'Back', sales_path ,class:"btn btn-md btn-warning"%> |
+        <%= link_to 'Pdf' ,"",class:"btn btn-md btn-success ",onclick:"passvar()"%> |
+        <%= link_to 'Excel', sale_path(format: :xlsx) ,class:"btn btn-md btn-info"%>
+
+        <hr>
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-calendar"></span> | <strong>Date</strong></div>
+            <div class="panel-body"><p class="text-center"><font size="4" color="green"><%= @sale.date %></font></p></div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"> <span class="glyphicon glyphicon-user"> </span> |<strong> Customer</strong></div>
+            <div class="panel-body"><p class="text-center"><font size="4" color="green">  <% if @sale.contact %> <%= @sale.contact.raison %><%end%></font></p></div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-euro"></span> | <strong>Total price</strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">   <%= @sale.total_price %> DZD</font></p></div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+          <div class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-gift"></span> | <strong>Bonus</strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">
+              <% @cont_bon.each { |s| %>
+                  <%= s.bonus %>
+                  <%= link_to '' ,{controller: 'sales', action: 'del_bonus', id: s.sale_id}, {:class=>"glyphicon glyphicon-remove" } %>
+
+              <% } %>
+
+
+            </font></p></div>
+          </div>
+        </div>
+
+        <span class="button-checkbox">
+        <button type="button"   class="btn"  data-color="primary">Bonus displayed</button>
+        <input type="checkbox" value="<%= @bon = 0 %>" class='check hidden' data-remote="true" >
+        </span>
+
+        <hr>
+
+
+        <a class="btn btn-info" data-toggle="modal" href="#betaModal1">Add Bonus</a>
+        <div id="betaModal1" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button class="close" data-dismiss="modal">×</button>
+                <h3>Add Bonus</h3>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <%= form_tag(sales_add_bonus_path, {:method => :post}) do %>
+                      <%= hidden_field_tag :id, @sale.id %>
+                  <div class="col-md-4" >
+                    <strong>Products:</strong>
+                    <%= select_tag :product_id, options_for_select(Stock.all.map{|u| [u.designation + "("+u.amount.to_s+")" , u.product_id] }.compact),{prompt: "select product",class:"form-control", required: true} %>
+                  </div>
+                    <div class="col-md-4">
+                      <strong>Quantity:</strong>
+                      <%= text_field_tag :quantity,nil,{class:"form-control" ,placeholder:"Quantité",:required => true}%>
+                    </div>
+                      <div class="col-md-4" >
+                        <strong>authorizer:</strong>
+                        <%= select_tag :authorizer, options_for_select([["Gerant","gerant"],["Directeur","directeur"]] ),{prompt: "select product",class:"form-control", required: true} %>
+                      </div>
+                      <br>
+                      <div class="col-md-12" >
+                        <br>
+                    <%= submit_tag 'Add', class: 'btn btn-success' %>
+                      </div>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn btn-success" data-toggle="modal" href="#betaModal">Add </a>
+        <div id="betaModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button class="close" data-dismiss="modal">×</button>
+                <h3>Add Product</h3>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <%= form_tag(sales_add_produit_path, {:method => :post}) do %>
+                      <%= hidden_field_tag :id, @sale.id %>
+
+              <div class="col-md-4" >
+                <strong>Products:</strong>
+                <%= select_tag :product_id, options_for_select(Stock.all_except(@cont_sel.map(&:product_id)).map{|u| [u.designation + "("+u.amount.to_s+")"  , u.product_id,{'data-price'=>u.price}] }.compact),{prompt: "select product",class:"form-control", required: true, id:'product'} %>
+
+              </div>
+                      <div class="col-md-4">
+                <strong>Quantity:</strong>
+                <%= text_field_tag :quantity,nil,{class:"form-control" ,placeholder:"Quantité",:required => true}%>
+              </div>
+
+              <div class="col-md-4" >
+                <strong>Price:</strong>
+                <%= text_field_tag :price,nil,{class:"form-control" ,placeholder: "prix",id: 'priceId',:required => true }   %>
+              </div>
+
+                      <div class="col-md-4">
+                        <strong>Remise:</strong>
+                        <%= text_field_tag :remise,nil,{class:"form-control" ,placeholder: "remise" }   %>
+                      </div>
+
+                      <div class="col-md-4">
+                <br>
+                <%= submit_tag 'Create', class: 'btn btn-success',id: 'hello' %>
+              </div>
+          <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <br>
+        <table class="table table-sm">
+          <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Quantity</th>
+            <th>price</th>
+            <th>partial price</th>
+            <th>Remise</th>
+
+            <% if can? :update, @sale %>
+            <th>Action</th>
+                <% end %>
+          </tr>
+          </thead>
+          <tbody>
+          <% @ven_pros.each { |s| %>
+              <tr>
+                <td><%= s.product.designation %></td>
+                <td><%= s.quantity %></td>
+                <td><%= s.price %> DZD</td>
+                <td><%= s.price * s.quantity%> DZD</td>
+                <% if s.remise != 0 %>
+                  <td><%= (s.price * s.quantity) - (s.remise * s.quantity)%> DZD
+                    <%else%>
+                  <td> <%s.remise%>
+              <% end %></td>
+
+                <% if can? :destroy, @sale %>
+              <td><%= link_to 'Destroy', "/sales/#{params[:id]}/delete_produit/#{s.id};", data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
+              </tr>
+               <% end %>
+          <% } %>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+    var e1 =document.getElementById('quantity');
+    if (e1) {
+        e1.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,9})(\d{0,2})/);
+            e.target.value =   (x[1] ? x[1] : '') + (x[2] ? + x[2] : '');
+        });}
+</script>
+
+<script>
+    var e1 =document.getElementById('remise');
+    if (e1) {
+        e1.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/^[:digit:]*$/);
+            e.target.value =   (x[1] ?  x[1]  : '');
+        });}
+</script>
+
+<script>
+    $(function () {
+        $('#product').change(function () {
+            $('#priceId').val($('#product option:selected').attr('data-price'));
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $('#product').change(function () {
+    <% if @sale.total_price <= 80000 %>
+    alert(<%= @sale.total_price %>);
+    <% end %>
+        });
+    });
+</script>
+
+<script>
+    function passvar() {
+        window.location = '/sales/<%=@sale.id%>.pdf?bonus='+($('.check').is(':checked') ? '1' : '0');
+    }
+</script>
+<script>
+    $(function () {
+        $('.button-checkbox').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                $button = $widget.find('button'),
+                $checkbox = $widget.find('input:checkbox'),
+                color = $button.data('color'),
+                settings = {
+                    on: {
+                        icon: 'glyphicon glyphicon-check'
+                    },
+                    off: {
+                        icon: 'glyphicon glyphicon-unchecked'
+                    }
+                };
+
+            // Event Handlers
+            $button.on('click', function () {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+            });
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $button.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $button.find('.state-icon')
+                    .removeClass()
+                    .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $button
+                        .removeClass('btn-default')
+                        .addClass('btn-' + color + ' active');
+                }
+                else {
+                    $button
+                        .removeClass('btn-' + color + ' active')
+                        .addClass('btn-default');
+                }
+            }
+
+            // Initialization
+            function init() {
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($button.find('.state-icon').length == 0) {
+                    $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                }
+            }
+            init();
+        });
+    });
+
+</script>

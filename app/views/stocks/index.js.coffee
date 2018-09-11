@@ -1,0 +1,1 @@
+$("#table_search").empty().append("<%= escape_javascript(render(:partial => 'index', locals: {paginate: @paginate})) %>")

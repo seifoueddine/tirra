@@ -1,0 +1,77 @@
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <h1> <span class="glyphicon glyphicon-shopping-cart"> </span> | Sales</h1>
+      <hr>
+
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= link_to 'New Sale', new_sale_path ,class:"btn btn-md btn-success"%>        </div>
+        <br>
+        <%= form_tag '/sales', method: :get do %>
+            <div class="col-sm-3">
+            <strong style="float: left">Debut </strong><%= text_field_tag :start_date, session[:start_pub] , class: 'datepicker form-control date', 'data-date-format'=>"dd/mm/yyyy", required: true  %>
+            </div>
+            <div class="col-sm-3">
+
+              <strong>Fin</strong><%= text_field_tag :end_date, session[:end_pub] , class: 'datepicker form-control date', 'data-date-format'=>"dd/mm/yyyy", required: true %>
+            </div>
+            <br>
+
+            <%= submit_tag 'Filter' ,class: 'btn btn-primary col-md-1 '%>
+
+            <br>
+        <%end%>
+
+<br>
+<hr>
+        <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-sm-9">
+                      <div class="dataTables_length input-group" id="example_length">
+                        <div class="col-sm-2">
+                          <span>Voir</span>
+                        </div>
+                        <div class="col-sm-6" style="margin-left: 10px">
+                          <%= select_tag(:count,options_for_select([10,25,50], selected: session[:per_pages]),class:"form-control input-sm", onchange:"SelectSearch(id,'sales','')", id:"select" )%>
+                        </div>
+                        <span>entrées</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div id="example_filter" class="dataTables_filter">
+                        <%= search_field_tag "search_champ",session[:data] ,{class:"form-control input-sm",placeholder:"Chercher",onKeyUp:"SelectSearch(id,'sales','')" }%>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row" id="table_search" style="padding: 10px">
+                    <%= render(:partial => 'index', locals: {paginate: @paginate})%>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(function() {
+        $( ".date" ).datepicker({
+            dateFormat : 'mm/dd/yy',
+            changeMonth : true,
+            changeYear : true,
+            yearRange: '-100y:c+nn',
+            maxDate: '-1d'
+        });
+    });
+
+</script>

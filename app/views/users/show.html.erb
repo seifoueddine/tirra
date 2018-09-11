@@ -1,0 +1,40 @@
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> User name: <%= @user.name %></h1>
+        <hr>
+        <%= link_to 'Edit', edit_user_path(@user),class:"btn btn-md btn-primary" %> |
+        <%= link_to 'Back', users_path ,class:"btn btn-md btn-warning"%> |
+        <%= link_to 'Change passd', "change_passd/#{@user.id}" ,class:"btn btn-md btn-success"%>
+
+        <hr>
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Name </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @user.name %></font></p></div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Email </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @user.email %></font></p></div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Role </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">     <%= @user.role %></font></p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

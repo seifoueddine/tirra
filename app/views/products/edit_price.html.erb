@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <h1> Editing Price : <%= @product.designation %></h1>
+        <hr>
+        <%= link_to 'Back', products_path,class:"btn btn-md btn-warning" %>
+        <hr>
+
+<%= form_for(@product) do |form| %>
+    <% if @product.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+          <ul>
+            <% @product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <br>
+    <div class="field  " >
+      <%= form.label :code %>
+      <%= form.text_field :code, id: :product_code,class:"form-control",required: true,disabled:true  %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :designation %>
+      <%= form.text_field :designation, id: :product_designation,class:"form-control" ,disabled:true %>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= form.label :family_id %>
+      <%= form.select :family_id, options_from_collection_for_select(Family.all,'id','name'),{},class:"form-control",disabled:true%>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= form.label :price %>
+      <%= form.text_field :price,id: :product_price,class:"form-control"%>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= form.label :image %>
+      <%= form.file_field :image,class:"form-control" ,disabled:true%>
+    </div>
+    <hr>
+    <div class="actions">
+      <%= form.submit class:"btn btn-md btn-success pull-right"%>
+    </div>
+    <br>
+<% end %>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+    var e1 =document.getElementById('product_price');
+    if (e1) {
+        e1.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/^[:digit:]*$/);
+            e.target.value =   (x[1] ?  x[1]  : '');
+        });}
+</script>
+
+<!--- ^\d+(([.,])\d+)?$  just string --->
+
+<!--- ^[:digit:]*$  half solution --->

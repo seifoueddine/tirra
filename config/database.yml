@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
-  database: GestionApp_production
-  username: root
-  password: Nouara123*$$
+  database: aerophar_dev
+  username: aerophar_remote
+  password: 9IL-bYwThx&9
+  host: aeropharm-dz.com
+  port: 7822

@@ -77,6 +77,7 @@ namespace :deploy do
   after  :finishing,    :cleanup
 
 end
+set :conditionally_migrate, true
 set :linked_dirs, fetch(:linked_dirs, []).push('public/system')
 
 namespace :paperclip do

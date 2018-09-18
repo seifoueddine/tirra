@@ -26,12 +26,13 @@ class ServicesController < ApplicationController
   # POST /services.json
   def create
     @service = Service.new(service_params)
-
     @depaserv = DepartmentService.new
     @depaserv.department = Department.find @service.department_id
     @depaserv.service = @service
     @depaserv.save!
-
+    @user = User.find(service_params[:user_id])
+    @user.service_id = @service.id
+    @user.save!
     respond_to do |format|
       if @service.save
         format.html { redirect_to @service, notice: 'Service was successfully created.' }

@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :department_name %>
+    <%= form.text_field :name, id: :department_name ,class: 'form-control' , require: true%>
   </div>
 
 
@@ -28,6 +28,19 @@
   </div>-->
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-md btn-success pull-right"  %>
   </div>
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+

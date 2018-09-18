@@ -34,6 +34,25 @@
           </div>
         </div>
 
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Responsable du departement </strong></div>
+            <div class="panel-body">
+              <p class="text-center"><font size="4" color="green">   <%= @user.department_id ? @user.department.name : "N'est pas responsable"%></font></p></div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Responsable du service </strong></div>
+            <div class="panel-body">
+              <p class="text-center"><font size="4" color="green">     <%= @user.service_id ? @user.service.name : "N'est pas responsable" %> </font></p></div>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>

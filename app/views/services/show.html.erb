@@ -1,14 +1,37 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
 
-<p>
-  <strong>Name:</strong>
-  <%= @service.name %>
-</p>
+      <div class="panel-body">
+        <h1> Service : <%= @service.name %></h1>
+        <hr>
+        <%= link_to 'Edit', edit_service_path(@service),class:"btn btn-md btn-primary" %> |
+        <%= link_to 'Back', services_path ,class:"btn btn-md btn-warning"%> |
 
-<p>
-  <strong>User:</strong>
-  <%= @service.user_id %>
-</p>
+        <hr>
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Name </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @service.name %></font></p></div>
+          </div>
+        </div>
 
-<%= link_to 'Edit', edit_service_path(@service) %> |
-<%= link_to 'Back', services_path %>
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Responsable </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @service.user.name %></font></p></div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Departement </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">     <%= @service.department.name %></font></p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

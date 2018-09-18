@@ -1,0 +1,36 @@
+<table class="table sortable">
+  <thead>
+  <tr>
+    <th>Name <span class="glyphicon glyphicon-sort-by-alphabet"></span></th>
+    <th>Responstable <span class="glyphicon glyphicon-sort-by-alphabet"></span></th>
+    <th>Action</th>
+
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @paginate.each do |service| %>
+    <tr>
+      <td><%= service.name %></td>
+      <td><%= service.user.name %></td>
+      <td><%= link_to 'Show', service ,class:"btn btn-md btn-success"%>
+        <%= link_to 'Edit', edit_service_path(service),class:"btn btn-md btn-primary" %>
+        <%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-sm-6">
+    <div  id="dataTables-example_info" role="status" aria-live="polite">
+      <span>Affichage  <%=paginate.length%> de <%= @total%> entrées</span>
+    </div>
+  </div>
+  <div class="col-sm-6" >
+    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="position: absolute; right:13px; top: -20px">
+      <%= will_paginate paginate,renderer: BootstrapPagination::Rails , inner_window: 1 , previous_label: "Précédent", next_label: "Suivant"%>
+    </div>
+  </div>
+</div>

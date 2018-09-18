@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :department
-  belongs_to :service
+  belongs_to :department , optional: true
+  belongs_to :service , optional: true
 
 end

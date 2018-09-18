@@ -1,14 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
 
-<p>
-  <strong>Name:</strong>
-  <%= @department.name %>
-</p>
+      <div class="panel-body">
+        <h1> Service : <%= @department.name %></h1>
+        <hr>
+        <%= link_to 'Edit', edit_department_path(@department),class:"btn btn-md btn-primary" %> |
+        <%= link_to 'Back', departments_path ,class:"btn btn-md btn-warning"%>
 
-<p>
-  <strong>User:</strong>
-  <%= @department.user_id %>
-</p>
+        <hr>
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Name </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @department.name %></font></p></div>
+          </div>
+        </div>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Responsable </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @department.user.name %></font></p></div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Liste des services </strong></div>
+            <div class="panel-body"><p class="text-center" ><font size="4" color="green">
+
+
+              <% @depart_services.each { |s| %>
+                * <%= s.service.name %> <br>
+
+              <% } %>
+
+            </font></p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

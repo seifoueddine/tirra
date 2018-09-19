@@ -77,7 +77,7 @@ namespace :deploy do
   after  :finishing,    :cleanup
 
 end
-=begin
+
 
 set :linked_dirs, fetch(:linked_dirs, []).push('public/system')
 
@@ -95,7 +95,7 @@ namespace :paperclip do
 end
 
 after("deploy:compile_assets", "paperclip:build_missing_styles")
-=end
+
 
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma

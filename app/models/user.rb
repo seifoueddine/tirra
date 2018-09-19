@@ -7,4 +7,8 @@ class User < ApplicationRecord
   belongs_to :department , optional: true
   belongs_to :service , optional: true
 
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" } , default_url: ActionController::Base.helpers.asset_path('default-profile.jpg')
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+
+
 end

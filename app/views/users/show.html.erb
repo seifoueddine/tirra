@@ -5,11 +5,22 @@
     <div class="panel panel-default">
 
       <div class="panel-body">
-        <h1> Employé: <%= @user.name %></h1>
-        <hr>
+        <div class="row">
+          <div class="col-md-5 col-sm-4 col-xs-6">
+
+            <%= image_tag @user.image.url(:thumb), class: "img-responsive pull-left" %>
+            <h1> Employé: <%= @user.name %></h1>
+
+          </div>
+        </div>
+        <br>
         <%= link_to 'Edit', edit_user_path(@user),class:"btn btn-md btn-primary" %> |
         <%= link_to 'Back', users_path ,class:"btn btn-md btn-warning"%> |
         <%= link_to 'Change passd', "change_passd/#{@user.id}" ,class:"btn btn-md btn-success"%>
+
+        <div class="container">
+
+        </div>
 
         <hr>
         <div class="col-sm-12">
@@ -373,3 +384,26 @@
     </div>
   </div>
 </div>
+
+
+<style>
+
+
+  img {
+
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    -webkit-box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.75);
+    margin-bottom: 10px;
+    margin-right: 20px;
+  }
+
+  img:hover {
+    filter: none; /* IE6-9 */
+    -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+
+  }
+
+
+</style>

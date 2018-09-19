@@ -63,7 +63,7 @@ end
 
 # Never trust parameters from the scary internet, only allow the white list through.
 def user_params
-  params.require(:user).permit(:name,:email,:password,:role,:business_address,:workplace,:professional_mobile,:professional_telephone,:post,:post_occupied,:administrator,:mentor,:legal_hours_of_work,:number_identification,:number_piece_identity,:bank_account_number,:social_security_number,:sex,:marital_statue,:working_license,:visas,:work_permit_number,:expiry_date_visa,:contact_information,:birth_date,:place_of_birth,:personal_address,:presence,:linked_user,:IDBadge)
+  params.require(:user).permit(:image, :name,:email,:password,:role,:business_address,:workplace,:professional_mobile,:professional_telephone,:post,:post_occupied,:administrator,:mentor,:legal_hours_of_work,:number_identification,:number_piece_identity,:bank_account_number,:social_security_number,:sex,:marital_statue,:working_license,:visas,:work_permit_number,:expiry_date_visa,:contact_information,:birth_date,:place_of_birth,:personal_address,:presence,:linked_user,:IDBadge)
 end
 end
 

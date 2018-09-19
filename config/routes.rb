@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :roles
   resources :contacts
   resources :families
+
+  resources :users do
+    collection do
+      post :import
+    end
+  end
   get 'users/edit'
 
   get 'users/index'

@@ -1,0 +1,478 @@
+<%= form_for(user) do |f| %>
+
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this provider from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="field">
+    <%= f.label :name,"Nom de l'employé" %>
+    <%= f.text_field :name, id: :user_name ,class:"form-control"%>
+  </div>
+  <br>
+
+  <div class="field">
+
+    <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#ordine">Données perofessionnelles</button>
+
+
+    <div id="ordine" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Données perofessionnelles</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="modal-header">
+              <h4 class="modal-title text-center">Informations de contact</h4>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+                <div class="field">
+                  <%= f.label :business_address, "Addresse professionnelle" %>
+                  <%= f.text_field :business_address, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :workplace, "Lieu de travail" %>
+                  <%= f.text_field :workplace, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :email ,"Addresse email professionnelle" %>
+                  <%= f.text_field :email, id: :user_email, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :professional_mobile, "Tél portable professionnelle" %>
+                  <%= f.text_field :professional_mobile, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-12">
+
+
+                <div class="field">
+                  <%= f.label :professional_telephone, "Tél professionnelle" %>
+                  <%= f.text_field :professional_telephone, id: :user_email, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="field">
+                  <%= f.label :post, "Poste" %>
+                  <%= f.text_field :post, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :department_id ,"Département"%>
+                  <%= f.select :department_id, Department.all.collect { |p| [p.name, p.id] }, {prompt: "select a department"}, class: 'form-control' %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :service_id, "Service" %>
+                  <%= f.select :service_id, Service.all.collect {|p| [p.name, p.id]}, {prompt: "select a service"}, class: 'form-control' %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :post_occupied, "Poste occupée" %>
+                  <%= f.text_field :post_occupied, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :administrator, "Gestionnaire" %>
+                  <%= f.text_field :administrator, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :mentor, "mentor" %>
+                  <%= f.text_field :mentor, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :legal_hours_of_work, "Heures legale de travail" %>
+                  <%= f.text_field :legal_hours_of_work, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="field">
+
+    <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#ordine2">Données
+      personnelles
+    </button>
+
+
+    <div id="ordine2" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Données personnelles</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="modal-header">
+
+              <h3 class="modal-title text-center">Nationalité autre informations</h3>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12">
+
+
+
+                <div class="field">
+                  <%= f.label :number_identification, "N identification" %>
+                  <%= f.text_field :number_identification, class: "form-control" %>
+                </div>
+
+
+                <div class="field">
+                  <%= f.label :number_piece_identity, "N pièce identité" %>
+                  <%= f.text_field :number_piece_identity, class: "form-control" %>
+                </div>
+
+
+                <div class="field">
+                  <%= f.label :bank_account_number, "Numéro compte bancaire" %>
+                  <%= f.text_field :bank_account_number, class: "form-control" %>
+                </div>
+
+
+                <div class="field">
+                  <%= f.label :social_security_number, "Numéro sécurité social" %>
+                  <%= f.text_field :social_security_number, class: "form-control" %>
+                </div>
+
+
+
+
+
+
+              </div>
+
+
+
+            </div>
+
+            <div class="modal-header">
+
+              <h3 class="modal-title text-center">Etat</h3>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :sex, "Genre F/H" %>
+                  <%= f.select :sex, options_for_select([["Homme","Homme"],["Femme","Femme"]]),{},class:"form-control"%>
+                </div>
+              </div>
+              <div class="col-sm-6">
+
+                <div class="field">
+                  <%= f.label :marital_statue, "Statut matrimonial" %>
+                  <%= f.select :marital_statue, options_for_select([["Marié(e)","Marié(e)"],["Celibataire","Celibataire"],["Veuf/Veuve","Veuf/Veuve"],["Divorcé(e)","Divorcé(e)"]]),{},class:"form-control"%>
+                </div>
+              </div>
+
+
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :working_license, "Permis de travail" %>
+                  <%= f.text_field :working_license, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :visas, "Visas N" %>
+                  <%= f.text_field :visas, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :work_permit_number, "Numéro permis de travail" %>
+                  <%= f.text_field :work_permit_number, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+
+                <div class="field">
+                  <%= f.label :expiry_date_visa ,"Date d'expiration de visa" %>
+                  <%= f.text_field :expiry_date_visa, :value => action_name == 'new' ? Time.now.strftime("%d/%m/%Y") : user.expiry_date_visa, class: 'datepicker form-control date', 'data-date-format' => "dd/mm/yyyy", required: true, tabindex: "1" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :contact_information, "Information du contact" %>
+                  <%= f.text_field :contact_information, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :personal_address, "Adresse personnelle" %>
+                  <%= f.text_field :personal_address, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :birth_date, "Date de naissance" %>
+                  <%= f.text_field :birth_date, :value => action_name == 'new' ? Time.now.strftime("%d/%m/%Y") : user.birth_date, class: 'datepicker form-control date', 'data-date-format' => "dd/mm/yyyy", required: true, tabindex: "1" %>
+                </div>
+
+
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :place_of_birth, "Lieu de naissance" %>
+                  <%= f.text_field :place_of_birth, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  <div class="field">
+
+    <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#ordine3">Paramétres RH
+    </button>
+
+
+    <div id="ordine3" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Paramétre RH</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="modal-header">
+
+              <h3 class="modal-title text-center">Etat</h3>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-sm-12">
+
+
+                <div class="field">
+                  <%= f.label :linked_user, "Utilisateur lié" %>
+                  <%= f.text_field :linked_user, class: "form-control" %>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+
+
+                <div class="field">
+                  <%= f.label :presence, "Presence" %>
+                  <%= f.text_field :presence, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="field">
+                  <%= f.label :IDBadge, "ID du badge" %>
+                  <%= f.text_field :IDBadge, class: "form-control" %>
+                </div>
+              </div>
+
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "off" ,class:"form-control"%>
+  </div>
+  <hr>
+  <div class="field">
+    <%= f.label :role %><br />
+
+    <%= f.select :role, options_for_select([["Admin","admin"],["Operator","operator"]]),{},class:"form-control"%>
+
+  </div>
+  <hr>
+  <div class="form-group">
+    <%= f.submit "Créer l'employé", class:"btn btn-md btn-success pull-right" %>
+  </div>
+  <br>
+
+<% end %>
+
+
+<script>
+    $(function () {
+        $(".date").datepicker({
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '-100y:c+nn',
+            maxDate: '-1d'
+        });
+    });
+
+</script>
+
+<script>
+    var e3 = document.getElementById('date');
+    if (e3) {
+        e3.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
+            e.target.value = (x[1] ? x[1] : '') + (x[2] ? '/' + x[2] : '') + (x[3] ? '/' + x[3] : '');
+        });
+    }
+</script>

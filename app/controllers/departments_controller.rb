@@ -26,13 +26,11 @@ class DepartmentsController < ApplicationController
   # POST /departments.json
   def create
     @department = Department.new(department_params)
-    @user = User.find(department_params[:user_id])
-
 
     respond_to do |format|
       if @department.save
-        @user.department_id = @department.id
-        @user.save!
+
+
         format.html { redirect_to @department, notice: 'Department was successfully created.' }
         format.json { render :show, status: :created, location: @department }
       else

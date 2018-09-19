@@ -30,9 +30,6 @@ class ServicesController < ApplicationController
     @depaserv.department = Department.find @service.department_id
     @depaserv.service = @service
     @depaserv.save!
-    @user = User.find(service_params[:user_id])
-    @user.service_id = @service.id
-    @user.save!
     respond_to do |format|
       if @service.save
         format.html { redirect_to @service, notice: 'Service was successfully created.' }

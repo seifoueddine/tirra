@@ -1,66 +1,20 @@
-
-
-
 <div class="row">
   <div class="col-sm-12">
     <div class="panel panel-default">
 
       <div class="panel-body">
-        <h1>New User</h1>
+        <h1>Nouvel employé</h1>
         <hr>
         <%= link_to 'Back', users_path,class:"btn btn-md btn-warning" %>
         <hr>
 
 
 
-        <%= form_for(@user) do |f| %>
 
-            <% if @user.errors.any? %>
-                <div id="error_explanation">
-                  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this provider from being saved:</h2>
 
-                  <ul>
-                    <% @user.errors.full_messages.each do |message| %>
-                        <li><%= message %></li>
-                    <% end %>
-                  </ul>
-                </div>
-            <% end %>
-            <br>
-            <div class="field">
-              <%= f.label :name %>
-              <%= f.text_field :name, id: :user_name ,class:"form-control",tabindex:"1"%>
-            </div>
-            <br>
-            <div class="field">
-              <%= f.label :email %>
-              <%= f.text_field :email, id: :user_email ,class:"form-control",tabindex:"2"%>
-            </div>
-            <br>
-            <div class="field">
-              <%= f.label :password %><br />
-              <%= f.password_field :password, autocomplete: "off" ,class:"form-control",tabindex:"3"%>
-            </div>
-            <hr>
-            <div class="field">
-              <%= f.label :role %><br />
-
-              <%= f.select :role, options_for_select([["Admin","admin"],["Operator","operator"]]),{},class:"form-control",tabindex:"4"%>
-
-            </div>
-            <hr>
-            <div class="form-group">
-              <%= f.submit class:"btn btn-md btn-success pull-right" ,tabindex:"5"%>
-            </div>
-            <br>
-
-        <% end %>
+        <%= render 'form', user: @user %>
 
       </div>
     </div>
   </div>
 </div>
-
-
-
-

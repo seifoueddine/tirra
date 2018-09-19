@@ -5,52 +5,368 @@
     <div class="panel panel-default">
 
       <div class="panel-body">
-        <h1> User name: <%= @user.name %></h1>
+        <h1> Employé: <%= @user.name %></h1>
         <hr>
         <%= link_to 'Edit', edit_user_path(@user),class:"btn btn-md btn-primary" %> |
         <%= link_to 'Back', users_path ,class:"btn btn-md btn-warning"%> |
         <%= link_to 'Change passd', "change_passd/#{@user.id}" ,class:"btn btn-md btn-success"%>
 
         <hr>
-        <div class="col-sm-4">
+        <div class="col-sm-12">
           <div class="panel panel-success">
             <div class="panel-heading"><strong>Name </strong></div>
-            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @user.name %></font></p></div>
+            <div class="panel-body"><p class="text-center" ><b color="green"> <%= @user.name %></b></p></div>
           </div>
         </div>
 
-
-        <div class="col-sm-4">
-          <div class="panel panel-success">
-            <div class="panel-heading"><strong>Email </strong></div>
-            <div class="panel-body"><p class="text-center" ><font size="4" color="green">    <%= @user.email %></font></p></div>
-          </div>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="panel panel-success">
-            <div class="panel-heading"><strong>Role </strong></div>
-            <div class="panel-body"><p class="text-center" ><font size="4" color="green">     <%= @user.role %></font></p></div>
-          </div>
-        </div>
-
-
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="panel panel-success">
             <div class="panel-heading"><strong>Responsable du departement </strong></div>
             <div class="panel-body">
-              <p class="text-center"><font size="4" color="green">   <%= @user.department_id ? @user.department.name : "N'est pas responsable"%></font></p></div>
+              <p class="text-center">
+                <b color="green">   <%= @department ? @department.name : "N'est pas responsable" %></b>
+              </p></div>
           </div>
         </div>
 
 
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="panel panel-success">
             <div class="panel-heading"><strong>Responsable du service </strong></div>
             <div class="panel-body">
-              <p class="text-center"><font size="4" color="green">     <%= @user.service_id ? @user.service.name : "N'est pas responsable" %> </font></p></div>
+              <p class="text-center">
+                <b color="green">     <%= @service ? @service.name : "N'est pas responsable" %> </b>
+              </p></div>
           </div>
         </div>
+
+        <div class="col-sm-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading text-center">Données perofessionnelles</div>
+          <div class="panel-body">
+
+           <div class="row" >
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Email </strong></div>
+                <div class="panel-body"><p class="text-center" ><b color="green">    <%= @user.email %></b></p></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Addresse professionnelle </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.business_address ?  @user.business_address : " "%></b></p></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Lieu de travail </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.workplace %></b></p></div>
+              </div>
+            </div>
+
+           </div>
+            <div class="row" >
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Tél portable professionnelle </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.professional_mobile %></b></p></div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Tél professionnelle </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.professional_telephone %></b></p></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Poste </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.post %></b></p></div>
+              </div>
+            </div>
+
+            </div>
+            <div class="row" >
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Département </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.department %></b></p></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Service </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.service %></b></p></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Poste occupé </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.post_occupied %></b></p></div>
+              </div>
+            </div>
+
+            </div>
+            <div class="row" >
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Gestionnaire </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.administrator %></b></p></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>mentor </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.mentor %></b></p></div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-4">
+              <div class="panel panel-success">
+                <div class="panel-heading"><strong>Heures legale de travail </strong></div>
+                <div class="panel-body">
+                  <p class="text-center"><b color="green">    <%= @user.legal_hours_of_work %></b></p></div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading text-center">Données personnelle</div>
+            <div class="panel-body">
+              <div class="row" >
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>N identification </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.number_identification %></b></p></div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>N pièce identité </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.number_piece_identity %></b></p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Numéro compte bancaire </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.bank_account_number %></b></p></div>
+                </div>
+              </div>
+              </div>
+
+              <div class="row" >
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Numéro sécurité social </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.social_security_number %></b></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Tél professionnelle </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.professional_telephone %></b>
+                    </p></div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Genre F/H </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.sex %></b></p></div>
+                </div>
+              </div>
+              </div>
+              <div class="row" >
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Statut matrimonial</strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.marital_statue %></b></p></div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Permis de travail </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.working_license %></b></p></div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Visas N </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.visas %></b></p></div>
+                </div>
+              </div>
+
+              </div>
+              <div class="row" >
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Numéro permis de travail </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.work_permit_number %></b></p></div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Date d'expiration de visa </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.expiry_date_visa %></b></p></div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Information du contact </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.contact_information %></b></p>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row" >
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Adresse personnelle </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.personal_address %></b></p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Date de naissance </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.birth_date %></b></p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Lieu de naissance </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.place_of_birth %></b></p>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading text-center">Paramètres RH</div>
+            <div class="panel-body">
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Presence </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.presence %></b>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>Utilisateur lié </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.linked_user %></b></p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading"><strong>ID de badge </strong></div>
+                  <div class="panel-body">
+                    <p class="text-center"><b color="green">    <%= @user.IDBadge %></b>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="panel panel-success">
+            <div class="panel-heading"><strong>Role </strong></div>
+            <div class="panel-body"><p class="text-center" ><b color="green">     <%= @user.role %></b></p></div>
+          </div>
+        </div>
+
+
+
 
 
       </div>

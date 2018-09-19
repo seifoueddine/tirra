@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ERP App</title>
+    <title>Aeropharm</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -20,7 +20,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<%= root_path%>">My ERP</a>
+        <a class="navbar-brand" href="<%= root_path%>">Aeropharm</a>
       </div>
 
 
@@ -50,13 +50,13 @@
           </li>
 
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ressource humaine
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ressources humaines
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><%= link_to 'Départements', departments_path %></li>
                 <li><%= link_to 'Services', services_path %></li>
                 <% if can? :update, @user %>
-                  <li><%= link_to 'User', users_path %></li>
+                  <li><%= link_to 'Employés', users_path %></li>
                 <% end %>
               </ul>
             </li>
@@ -104,7 +104,7 @@
       <% end %>
       <div class="row">
         <div class="col-md-12 text-center ">
-          <p> ERP App par <b style="color:red" >Seif Eddine NOUARA</b></p>
+          <p> Aeropharm App par <b style="color:red" >Seif Eddine NOUARA</b></p>
         </div>   </div>
     </div>
   </div>

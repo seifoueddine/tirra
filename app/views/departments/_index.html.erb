@@ -10,13 +10,13 @@
   </thead>
 
   <tbody>
-  <% @paginate.each do |service| %>
+  <% @paginate.each do |department| %>
     <tr>
-      <td><%= service.name %></td>
-      <td><%= service.user.name %></td>
-      <td><%= link_to 'Show', service ,class:"btn btn-md btn-success"%>
-        <%= link_to 'Edit', edit_service_path(service),class:"btn btn-md btn-primary" %>
-        <%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
+      <td><%=department.name %></td>
+      <td><%= department.user.name %></td>
+      <td><%= link_to 'Show', department ,class:"btn btn-md btn-success"%>
+        <%= link_to 'Edit', edit_department_path(department),class:"btn btn-md btn-primary" %>
+        <%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-md btn-danger"%></td>
     </tr>
 
   <% end %>

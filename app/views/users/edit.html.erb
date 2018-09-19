@@ -5,13 +5,11 @@
     <div class="panel panel-default">
 
       <div class="panel-body">
-        <h1> Editing User : <%= @user.name %></h1>
+        <h1> Modifier l'employé : <%= @user.name %></h1>
         <hr>
         <%= link_to 'Show', @user,class:"btn btn-md btn-success" %> |
         <%= link_to 'Back', users_path ,class:"btn btn-md btn-warning"%>
         <hr>
-
-
 
         <%= render 'form', user: @user %>
 

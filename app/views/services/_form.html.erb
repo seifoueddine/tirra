@@ -30,6 +30,11 @@
     <%= form.select :department_id, Department.all.collect {|d| [d.name, d.id]}, {prompt: "select a department"}, class: 'form-control' %>
   </div>
 
+  <div class="field">
+    <%= form.label :activity_area ,"Zone d'activité"%>
+    <%= form.text_field :activity_area,  class: "form-control" %>
+  </div>
+
 <!--  <div class="field">
     <%#= form.label :user_id %>
     <%#= form.number_field :user_id, id: :service_user_id %>
